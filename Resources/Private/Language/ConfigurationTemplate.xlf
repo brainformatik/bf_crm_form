@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-04-20T12:00:00Z" product-name="bf_crm_form">
+        <header/>
+        <body>
+            <trans-unit id="extension.form" xml:space="preserve">
+				<source>Use with typo3 form: (Troubleshooting -> Clear backend cache)</source>
+			</trans-unit>
+            <trans-unit id="extension.powermail" xml:space="preserve">
+				<source>Use with powermail: (Troubleshooting -> Clear backend cache)</source>
+			</trans-unit>
+
+            <trans-unit id="system.log.debug" xml:space="preserve">
+				<source>Debug Logging: (typo3temp/logs/typo3.log)</source>
+			</trans-unit>
+
+            <trans-unit id="system.log.error" xml:space="preserve">
+				<source>Logging of communication errors</source>
+			</trans-unit>
+        </body>
+    </file>
+</xliff>

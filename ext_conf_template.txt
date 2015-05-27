@@ -1,0 +1,8 @@
+# cat=Basic/enable; type=boolean; label=LLL:EXT:bf_crm_form/Resources/Private/Language/ConfigurationTemplate.xlf:extension.form
+enableForm = 0
+
+# cat=Basic/enable; type=boolean; label=LLL:EXT:bf_crm_form/Resources/Private/Language/ConfigurationTemplate.xlf:extension.powermail
+enablePowermail = 0
+
+# cat=Basic/enable; type=boolean; label=LLL:EXT:bf_crm_form/Resources/Private/Language/ConfigurationTemplate.xlf:system.log.debug
+enableLog = 0

@@ -1,0 +1,24 @@
+config.tx_extbase {
+    objects {
+        In2code\Powermail\Domain\Model\Field {
+            className = Brainformatik\BfCrmForm\Domain\Model\Field
+        }
+        In2code\Powermail\Domain\Model\Form {
+            className = Brainformatik\BfCrmForm\Domain\Model\Form
+        }
+    }
+    persistence {
+        classes {
+            Brainformatik\BfCrmForm\Domain\Model\Field {
+                mapping {
+                    tableName = tx_powermail_domain_model_fields
+                }
+            }
+            Brainformatik\BfCrmForm\Domain\Model\Form {
+                mapping {
+                    tableName = tx_powermail_domain_model_forms
+                }
+            }
+        }
+    }
+}
