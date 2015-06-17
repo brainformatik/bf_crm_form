@@ -81,7 +81,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
 
         this.on('clientvalidation', this.validation, this);
 
-        this.filForm();
+        this.fillForm();
     },
 
     /**
