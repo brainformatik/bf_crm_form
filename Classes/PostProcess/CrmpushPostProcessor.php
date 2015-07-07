@@ -24,7 +24,7 @@ use Brainformatik\BfCrmForm\Service\PushService;
  * Class CrmpushPostProcessor
  * @package TYPO3\CMS\Form\PostProcess
  */
-class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorInterface {
+class CrmpushPostProcessor implements PostProcessorInterface {
 
     /**
      * @var \TYPO3\CMS\Form\Domain\Model\Form

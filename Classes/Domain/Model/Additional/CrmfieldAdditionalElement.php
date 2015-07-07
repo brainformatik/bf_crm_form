@@ -18,7 +18,7 @@ namespace TYPO3\CMS\Form\Domain\Model\Additional;
  * Class CrmfieldAdditionalElement
  * @package TYPO3\CMS\Form\Domain\Model\Additional
  */
-class CrmfieldAdditionalElement extends \TYPO3\CMS\Form\Domain\Model\Additional\AbstractAdditionalElement {
+class CrmfieldAdditionalElement extends AbstractAdditionalElement {
 
     /**
      * Return the value of the object
