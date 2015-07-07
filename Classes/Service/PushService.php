@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Service;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -40,17 +41,17 @@ class PushService {
     /**
      * @var array
      */
-    protected $metaData = array();
+    protected $metaData = [];
 
     /**
      * @var array
      */
-    protected $formData = array();
+    protected $formData = [];
 
     /**
      * @var array
      */
-    protected $session = array();
+    protected $session = [];
 
     /**
      * @param array $crmMetaData
@@ -86,10 +87,10 @@ class PushService {
      */
     protected function getToken() {
         $response = $this->send(
-            array(
+            [
                 'operation' => 'getchallenge',
-                'username'  => $this->metaData['username']
-            ),
+                'username' => $this->metaData['username']
+            ],
             HttpRequest::METHOD_GET
         );
 
@@ -107,16 +108,16 @@ class PushService {
      */
     protected function login() {
         $response = $this->send(
-            array(
+            [
                 'operation' => 'login',
-                'username'  => $this->metaData['username'],
-                'accessKey' => md5($this->session['token'].$this->metaData['accesskey'])
-            ),
+                'username' => $this->metaData['username'],
+                'accessKey' => md5($this->session['token'] . $this->metaData['accesskey'])
+            ],
             HttpRequest::METHOD_POST
         );
 
         if ($response['success']) {
-            $this->session['userid']     = $response['result']['userId'];
+            $this->session['userid'] = $response['result']['userId'];
             $this->session['sessionkey'] = $response['result']['sessionName'];
         }
 
@@ -130,10 +131,10 @@ class PushService {
      */
     protected function logout() {
         $response = $this->send(
-            array(
-                'operation'   => 'logout',
+            [
+                'operation' => 'logout',
                 'sessionName' => $this->session['sessionkey'],
-            ),
+            ],
             HttpRequest::METHOD_POST
         );
 
@@ -154,12 +155,12 @@ class PushService {
         }
 
         $response = $this->send(
-            array(
-                'operation'   => 'create',
+            [
+                'operation' => 'create',
                 'sessionName' => $this->session['sessionkey'],
-                'element'     => json_encode($this->formData),
+                'element' => json_encode($this->formData),
                 'elementType' => $this->metaData['module']
-            ),
+            ],
             HttpRequest::METHOD_POST
         );
 
@@ -169,7 +170,7 @@ class PushService {
     /**
      * Request helper
      *
-     * @param array $data
+     * @param array  $data
      * @param string $method
      *
      * @return array
@@ -189,7 +190,7 @@ class PushService {
 
         if ($this->extConf['enableLog']) {
             $this->logger->debug('Request', $data);
-            $this->logger->debug('Response', is_array($response) ? $response : array($response));
+            $this->logger->debug('Response', is_array($response) ? $response : [$response]);
         }
 
         return $response;

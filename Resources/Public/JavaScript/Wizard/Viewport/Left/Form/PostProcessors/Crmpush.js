@@ -14,16 +14,16 @@ TYPO3.Form.Wizard.Viewport.Left.Form.PostProcessors.Crmpush = Ext.extend(TYPO3.F
      */
     processor: 'crmpush',
 
-    initComponent: function() {
+    initComponent: function () {
         var fields = this.getFieldsBySettings();
-        var formItems = new Array();
+        var formItems = [];
 
         this.addEvents({
             'validation': true
         });
 
-        Ext.iterate(fields, function(item, index, allItems) {
-            switch(item) {
+        Ext.iterate(fields, function (item, index, allItems) {
+            switch (item) {
                 case 'url':
                     formItems.push({
                         fieldLabel: TYPO3.l10n.localize('crmpush_url'),
@@ -116,7 +116,7 @@ TYPO3.Form.Wizard.Viewport.Left.Form.PostProcessors.Crmpush = Ext.extend(TYPO3.F
      *
      * @param config
      */
-    constructor: function(config) {
+    constructor: function (config) {
         Ext.apply(this, {
             configuration: {
                 url: '',

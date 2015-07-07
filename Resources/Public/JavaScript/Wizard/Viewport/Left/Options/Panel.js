@@ -19,9 +19,9 @@ BF.BfCrmForm.Panel.elements = ['textline', 'textarea', 'password', 'hidden', 'ch
  *
  * @type TYPO3.Form.Wizard.Viewport.Left.Options.Panel.prototype.getAccordionsBySettings
  */
-TYPO3.Form.Wizard.Viewport.Left.Options.Panel.prototype.getAccordionsBySettings = function() {
+TYPO3.Form.Wizard.Viewport.Left.Options.Panel.prototype.getAccordionsBySettings = function () {
     if (this.element && !this.element.configuration['crmfield'] && BF.BfCrmForm.Panel.elements.indexOf(this.element.xtype.split('-').pop()) !== -1) {
-        this.element.configuration['crmfield'] = {value:''};
+        this.element.configuration['crmfield'] = {value: ''};
     }
 
     return BF.BfCrmForm.Panel.getAccordionsBySettings.apply(this);

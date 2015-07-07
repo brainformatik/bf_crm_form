@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Hooks;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -29,36 +30,36 @@ class WizardViewHook {
     /**
      * Initialization
      *
-     * @param array $params
+     * @param array                                  $params
      * @param \TYPO3\CMS\Form\View\Wizard\WizardView $wizardView
      */
     public function initialize($params, $wizardView) {
-		$this->wizardView = $wizardView;
-		$this->loadLocalization();
-		$this->loadJavascript();
+        $this->wizardView = $wizardView;
+        $this->loadLocalization();
+        $this->loadJavascript();
     }
 
     /**
      * Load localization
      */
-	public function loadLocalization() {
-		$wizardLabels = $GLOBALS['LANG']->includeLLFile('EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf', false, true);
-		$this->wizardView->doc->getPageRenderer()->addInlineLanguageLabelArray($wizardLabels['default']);	
-	}
+    public function loadLocalization() {
+        $wizardLabels = $GLOBALS['LANG']->includeLLFile('EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf', false, true);
+        $this->wizardView->doc->getPageRenderer()->addInlineLanguageLabelArray($wizardLabels['default']);
+    }
 
     /**
      * Load javascript
      */
-    public function loadJavascript() {	
-		$baseUrl = ExtensionManagementUtility::extRelPath('bf_crm_form') . 'Resources/Public/JavaScript/Wizard/';
-		$javascriptFiles = array(
+    public function loadJavascript() {
+        $baseUrl = ExtensionManagementUtility::extRelPath('bf_crm_form') . 'Resources/Public/JavaScript/Wizard/';
+        $javascriptFiles = [
             'Viewport/Left/Options/Panel.js',
             'Viewport/Left/Options/Forms/Crmfield.js',
             'Viewport/Left/Form/PostProcessors/Crmpush.js',
-        );
+        ];
 
-		foreach ($javascriptFiles as $javascriptFile) {
-			$this->wizardView->doc->getPageRenderer()->addJsFile($baseUrl . $javascriptFile, 'text/javascript', true, false);
-		}
+        foreach ($javascriptFiles as $javascriptFile) {
+            $this->wizardView->doc->getPageRenderer()->addJsFile($baseUrl . $javascriptFile, 'text/javascript', true, false);
+        }
     }
 }

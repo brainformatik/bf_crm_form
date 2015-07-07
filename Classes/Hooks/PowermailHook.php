@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Hooks;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -26,19 +27,19 @@ class PowermailHook {
     /**
      * @var array
      */
-    protected $_crmMetaData = array();
+    protected $_crmMetaData = [];
 
     /**
      * @var array
      */
-    protected $_crmFormData = array();
+    protected $_crmFormData = [];
 
     /**
      * @var array
      */
-    protected $_allowedElementTypes = array(
+    protected $_allowedElementTypes = [
         'input', 'textarea', 'select', 'radio', 'check', 'password', 'hidden', 'date', 'country', 'location'
-    );
+    ];
 
     /**
      * Convert selected values to a string which is compatible with crm field
@@ -55,9 +56,9 @@ class PowermailHook {
     /**
      * Main proccess
      *
-     * @param Mail      $mail
-     * @param string    $hash
-     * @param Object    $parent
+     * @param Mail   $mail
+     * @param string $hash
+     * @param Object $parent
      */
     public function process(Mail $mail, $hash, $parent) {
         $form = $mail->getForm();
@@ -66,12 +67,12 @@ class PowermailHook {
             return;
         }
 
-        $this->_crmMetaData = array(
+        $this->_crmMetaData = [
             'url' => $form->getTxBfcrmformUrl(),
             'username' => $form->getTxBfcrmformUsername(),
             'accesskey' => $form->getTxBfcrmformAccesskey(),
             'module' => $form->getTxBfcrmformModule()
-        );
+        ];
 
         foreach ($mail->getAnswers() as $answer) {
             if (!method_exists($answer, 'getField') || !method_exists($answer->getField(), 'getTxBfcrmformFieldname')) {
@@ -87,7 +88,7 @@ class PowermailHook {
             }
 
             $value = $answer->getValue();
-            switch($fieldType) {
+            switch ($fieldType) {
                 case 'select':
                     $value = $this->convertSelectedToString($field->getMultiselect(), $value);
                     break;
@@ -104,7 +105,7 @@ class PowermailHook {
 
             // concatenate values if duplicate keys exist
             if (isset($this->_crmFormData[$crmField])) {
-                $this->_crmFormData[$crmField] = $this->_crmFormData[$crmField] .' '. $value;
+                $this->_crmFormData[$crmField] = $this->_crmFormData[$crmField] . ' ' . $value;
             } else {
                 $this->_crmFormData[$crmField] = $value;
             }

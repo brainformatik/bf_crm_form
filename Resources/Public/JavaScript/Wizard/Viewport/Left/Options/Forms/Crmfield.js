@@ -9,13 +9,13 @@ Ext.namespace('TYPO3.Form.Wizard.Viewport.Left.Options.Forms');
 TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPanel, {
     /**
      * @cfg {String} title
-     * 
+     *
      * The title text to be used as innerHTML (html tags are accepted) to
      * display in the panel header (defaults to '').
      */
     title: TYPO3.l10n.localize('crmfield'),
 
-    /** 
+    /**
      * @cfg {String} defaultType
      *
      * The default xtype of child Components to create in this Container when
@@ -28,8 +28,8 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
     defaultType: 'textfield',
 
     /**
-     * @cfg {Boolean} monitorValid 
-     * 
+     * @cfg {Boolean} monitorValid
+     *
      * If true, the form monitors its valid state client-side and
      * regularly fires the clientvalidation event passing that state.
      * When monitoring valid state, the FormPanel enables/disables any of its configured
@@ -38,12 +38,12 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      */
     monitorValid: false,
 
-    initComponent: function() {
+    initComponent: function () {
         var fields = this.getFieldsBySettings();
         var formItems = [];
 
-        Ext.iterate(fields, function(item, index, allItems) {
-            switch(item) {
+        Ext.iterate(fields, function (item, index, allItems) {
+            switch (item) {
                 case 'value':
                     formItems.push({
                         fieldLabel: TYPO3.l10n.localize('crmfield_name'),
@@ -89,7 +89,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      *
      * @param config
      */
-    constructor: function(config){
+    constructor: function (config) {
         this.addEvents({
             'validation': true
         });
@@ -102,7 +102,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      *
      * @param {Object} field The field which has changed
      */
-    storeValue: function(field) {
+    storeValue: function (field) {
         if (field.isValid()) {
             var fieldName = field.getName();
 
@@ -118,7 +118,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      *
      * @return void
      */
-    fillForm: function() {
+    fillForm: function () {
         this.getForm().setValues(this.element.configuration.crmfield);
     },
 
@@ -130,7 +130,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      *
      * @returns object
      */
-    getFieldsBySettings: function() {
+    getFieldsBySettings: function () {
         var fields = [];
 
         try {
@@ -150,7 +150,7 @@ TYPO3.Form.Wizard.Viewport.Left.Options.Forms.Crmfield = Ext.extend(Ext.FormPane
      * @param {Object} formPanel
      * @param {Boolean} valid
      */
-    validation: function(formPanel, valid) {
+    validation: function (formPanel, valid) {
         if (this.el) {
             if (valid && this.el.hasClass('validation-error')) {
                 this.removeClass('validation-error');

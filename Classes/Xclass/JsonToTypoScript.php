@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Xclass;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *

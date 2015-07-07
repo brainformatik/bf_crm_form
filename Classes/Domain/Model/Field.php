@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Domain\Model;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -24,17 +25,17 @@ class Field extends \In2code\Powermail\Domain\Model\Field {
      */
     protected $txBfcrmformFieldname;
 
-	/**
-	 * @param string $txBfcrmformFieldname
-	 */
-	public function setTxBfcrmformFieldname($txBfcrmformFieldname) {
-		$this->txBfcrmformFieldname = $txBfcrmformFieldname;
-	}
+    /**
+     * @param string $txBfcrmformFieldname
+     */
+    public function setTxBfcrmformFieldname($txBfcrmformFieldname) {
+        $this->txBfcrmformFieldname = $txBfcrmformFieldname;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getTxBfcrmformFieldname() {
-		return $this->txBfcrmformFieldname;
-	}
+    /**
+     * @return string
+     */
+    public function getTxBfcrmformFieldname() {
+        return $this->txBfcrmformFieldname;
+    }
 }

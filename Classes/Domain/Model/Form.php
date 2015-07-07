@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Domain\Model;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -47,16 +48,16 @@ class Form extends \In2code\Powermail\Domain\Model\Form {
     /**
      * @param string $txBfcrmformActive
      */
-	public function setTxBfcrmformActive($txBfcrmformActive) {
-		$this->txBfcrmformActive = $txBfcrmformActive;
-	}
+    public function setTxBfcrmformActive($txBfcrmformActive) {
+        $this->txBfcrmformActive = $txBfcrmformActive;
+    }
 
     /**
      * @return string
      */
-	public function getTxBfcrmformActive() {
-		return $this->txBfcrmformActive;
-	}
+    public function getTxBfcrmformActive() {
+        return $this->txBfcrmformActive;
+    }
 
     /**
      * @param string $txBfcrmformUrl

@@ -1,5 +1,6 @@
 <?php
 namespace TYPO3\CMS\Form\PostProcess;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -43,7 +44,7 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
     /**
      * @var array
      */
-    protected $dirtyHeaders = array();
+    protected $dirtyHeaders = [];
 
     /**
      * @var \TYPO3\CMS\Form\Utility\FormUtility
@@ -53,23 +54,23 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
     /**
      * @var array
      */
-    protected $_crmMetaData = array();
+    protected $_crmMetaData = [];
 
     /**
      * @var array
      */
-    protected $_crmFormData = array();
+    protected $_crmFormData = [];
 
     /**
      * @var array
      */
-    protected $_allowedElementTypes = array(
+    protected $_allowedElementTypes = [
         'textline', 'textarea', 'password', 'hidden', 'checkbox', 'checkboxgroup', 'radio', 'radiogroup', 'select'
-    );
+    ];
 
     /**
-     * @param \TYPO3\CMS\Form\Domain\Model\Form $form Form domain model
-     * @param array $typoScript Post processor TypoScript settings
+     * @param \TYPO3\CMS\Form\Domain\Model\Form $form       Form domain model
+     * @param array                             $typoScript Post processor TypoScript settings
      */
     public function __construct(Form $form, array $typoScript) {
         $this->form = $form;
@@ -84,12 +85,12 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
      * @return string
      */
     public function process() {
-        $this->_crmMetaData = array(
+        $this->_crmMetaData = [
             'url' => $this->typoScript['url'],
             'username' => $this->typoScript['username'],
             'accesskey' => $this->typoScript['accesskey'],
             'module' => $this->typoScript['module']
-        );
+        ];
 
         $this->prepareDataForCrm($this->form->getElements());
 
@@ -102,7 +103,7 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
      * @param $elements
      */
     protected function prepareDataForCrm($elements) {
-        foreach($elements as $element) {
+        foreach ($elements as $element) {
             $elementType = $this->formUtility->getLastPartOfClassName($element, true);
 
             if ($elementType === 'fieldset') {
@@ -114,18 +115,17 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
             }
 
             $value = '';
-            switch($elementType) {
+            switch ($elementType) {
                 case 'radiogroup':    // single value checked == select type
                 case 'checkboxgroup': // single value checked == select type || multiple values checked == multiselect type
-                    foreach($element->getElements() as $_element) {
+                    foreach ($element->getElements() as $_element) {
                         $_elementType = $this->formUtility->getLastPartOfClassName($_element, true);
                         if ($_elementType === 'checkbox' || $_elementType === 'radio') {
                             if (array_key_exists('checked', $_element->getAllowedAttributes()) && $_element->hasAttribute('checked') && $_element->getAdditionalObjectByKey('label')) {
                                 // multiple
                                 if (strlen($value) > 0) {
                                     $value .= ' |##| ' . $_element->getAdditionalValue('label');
-                                }
-                                // single
+                                } // single
                                 else {
                                     $value = $_element->getAdditionalValue('label');
                                 }
@@ -141,14 +141,13 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
                     }
                     break;
                 case 'select':
-                    foreach($element->getElements() as $_element) {
+                    foreach ($element->getElements() as $_element) {
                         if ($this->formUtility->getLastPartOfClassName($_element, true) === 'option') {
                             if (array_key_exists('selected', $_element->getAllowedAttributes()) && $_element->hasAttribute('selected')) {
                                 // multiple
                                 if (strlen($value) > 0) {
                                     $value .= ' |##| ' . $_element->getData();
-                                }
-                                // single
+                                } // single
                                 else {
                                     $value = $_element->getData();
                                 }
@@ -170,7 +169,7 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
 
             // concatenate values if duplicate keys exist
             if (isset($this->_crmFormData[$crmField])) {
-                $this->_crmFormData[$crmField] = $this->_crmFormData[$crmField] .' '. $value;
+                $this->_crmFormData[$crmField] = $this->_crmFormData[$crmField] . ' ' . $value;
             } else {
                 $this->_crmFormData[$crmField] = $value;
             }
@@ -185,6 +184,7 @@ class CrmpushPostProcessor implements \TYPO3\CMS\Form\PostProcess\PostProcessorI
     protected function render() {
         $push = new PushService($this->_crmMetaData, $this->_crmFormData);
         $push->process();
+
         return '';
     }
 }

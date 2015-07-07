@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Xclass;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -22,11 +23,12 @@ class TypoScriptToJsonConverter extends \TYPO3\CMS\Form\Utility\TypoScriptToJson
     /**
      * Create element by loading class and instantiating the object
      *
-     * @param string $class Type of element
-     * @param array $arguments Configuration array
+     * @param string $class     Type of element
+     * @param array  $arguments Configuration array
+     *
      * @return \TYPO3\CMS\Form\Domain\Model\Json\AbstractJsonElement
      */
-    public function createElement($class, array $arguments = array()) {
+    public function createElement($class, array $arguments = []) {
         $object = parent::createElement($class, $arguments);
 
         if (isset($arguments['crmfield.']) && is_array($arguments['crmfield.'])) {

@@ -1,7 +1,7 @@
 mod.wizards {
     form {
-		defaults {
-			tabs {
+        defaults {
+            tabs {
                 options {
                     showAccordions := addToList(crmfield)
                     accordions {
@@ -22,8 +22,8 @@ mod.wizards {
                         }
                     }
                 }
-			}
-		}
+            }
+        }
         elements {
             textarea {
                 showAccordions := addToList(crmfield)
@@ -49,5 +49,5 @@ mod.wizards {
             radio < .checkbox
             radiogroup < .checkboxgroup
         }
-	}
+    }
 }

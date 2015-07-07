@@ -1,5 +1,6 @@
 <?php
 namespace Brainformatik\BfCrmForm\Xclass;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -25,10 +26,11 @@ class TypoScriptFactory extends \TYPO3\CMS\Form\Domain\Factory\TypoScriptFactory
      * Reconstitutes the domain model of the accordant element
      *
      * @param \TYPO3\CMS\Form\Domain\Model\Element\AbstractElement $element
-     * @param array $arguments Configuration array
+     * @param array                                                $arguments Configuration array
+     *
      * @return void
      */
-    protected function reconstituteElement(AbstractElement $element, array $arguments = array()) {
+    protected function reconstituteElement(AbstractElement $element, array $arguments = []) {
         if (isset($arguments['crmfield.'])) {
             $element->setAdditional('crmfield', 'TEXT', $arguments['crmfield.']);
         }

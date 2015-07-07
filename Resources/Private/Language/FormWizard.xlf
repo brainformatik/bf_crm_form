@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2015-04-20T12:00:00Z" product-name="bf_crm_form">
-		<header/>
-		<body>
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-04-20T12:00:00Z" product-name="bf_crm_form">
+        <header/>
+        <body>
             <trans-unit id="crmfield" xml:space="preserve">
-				<source>Crm Field</source>
-			</trans-unit>
+                <source>Crm Field</source>
+            </trans-unit>
             <trans-unit id="crmfield_name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
+                <source>Name</source>
+            </trans-unit>
 
             <trans-unit id="crmpush_active" xml:space="preserve">
-				<source>Active</source>
-			</trans-unit>
+                <source>Active</source>
+            </trans-unit>
             <trans-unit id="crmpush_url" xml:space="preserve">
-				<source>Url</source>
-			</trans-unit>
+                <source>Url</source>
+            </trans-unit>
             <trans-unit id="crmpush_username" xml:space="preserve">
-				<source>Username</source>
-			</trans-unit>
+                <source>Username</source>
+            </trans-unit>
             <trans-unit id="crmpush_accesskey" xml:space="preserve">
-				<source>Accesskey</source>
-			</trans-unit>
+                <source>Accesskey</source>
+            </trans-unit>
             <trans-unit id="crmpush_module" xml:space="preserve">
-				<source>Module</source>
-			</trans-unit>
+                <source>Module</source>
+            </trans-unit>
 
             <trans-unit id="crm" xml:space="preserve">
-				<source>Crm</source>
-			</trans-unit>
+                <source>Crm</source>
+            </trans-unit>
 
             <trans-unit id="postprocessor_crmpush" xml:space="preserve">
-				<source>Crm Push</source>
-			</trans-unit>
-		</body>
-	</file>
+                <source>Crm Push</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
