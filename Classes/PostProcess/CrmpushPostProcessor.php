@@ -146,10 +146,10 @@ class CrmpushPostProcessor implements PostProcessorInterface {
                             if (array_key_exists('selected', $_element->getAllowedAttributes()) && $_element->hasAttribute('selected')) {
                                 // multiple
                                 if (strlen($value) > 0) {
-                                    $value .= ' |##| ' . $_element->getData();
+                                    $value .= ' |##| ' . ($_element->hasAttribute('value')) ? $_element->getAttributeValue('value') : $_element->getData();
                                 } // single
                                 else {
-                                    $value = $_element->getData();
+                                    $value = ($_element->hasAttribute('value')) ? $_element->getAttributeValue('value') : $_element->getData();
                                 }
                             }
                         }
