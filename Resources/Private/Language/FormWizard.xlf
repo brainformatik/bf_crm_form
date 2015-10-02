@@ -16,14 +16,8 @@
             <trans-unit id="crmpush_url" xml:space="preserve">
                 <source>Url</source>
             </trans-unit>
-            <trans-unit id="crmpush_username" xml:space="preserve">
-                <source>Username</source>
-            </trans-unit>
             <trans-unit id="crmpush_accesskey" xml:space="preserve">
-                <source>Accesskey</source>
-            </trans-unit>
-            <trans-unit id="crmpush_module" xml:space="preserve">
-                <source>Module</source>
+                <source>Public Id</source>
             </trans-unit>
 
             <trans-unit id="crm" xml:space="preserve">

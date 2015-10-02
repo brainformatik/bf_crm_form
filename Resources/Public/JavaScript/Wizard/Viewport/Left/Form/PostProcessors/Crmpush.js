@@ -37,36 +37,10 @@ TYPO3.Form.Wizard.Viewport.Left.Form.PostProcessors.Crmpush = Ext.extend(TYPO3.F
                         }
                     });
                     break;
-                case 'username':
-                    formItems.push({
-                        fieldLabel: TYPO3.l10n.localize('crmpush_username'),
-                        name: 'username',
-                        allowBlank: false,
-                        listeners: {
-                            'triggerclick': {
-                                scope: this,
-                                fn: this.storeValue
-                            }
-                        }
-                    });
-                    break;
                 case 'accesskey':
                     formItems.push({
                         fieldLabel: TYPO3.l10n.localize('crmpush_accesskey'),
                         name: 'accesskey',
-                        allowBlank: false,
-                        listeners: {
-                            'triggerclick': {
-                                scope: this,
-                                fn: this.storeValue
-                            }
-                        }
-                    });
-                    break;
-                case 'module':
-                    formItems.push({
-                        fieldLabel: TYPO3.l10n.localize('crmpush_module'),
-                        name: 'module',
                         allowBlank: false,
                         listeners: {
                             'triggerclick': {
@@ -120,9 +94,7 @@ TYPO3.Form.Wizard.Viewport.Left.Form.PostProcessors.Crmpush = Ext.extend(TYPO3.F
         Ext.apply(this, {
             configuration: {
                 url: '',
-                username: '',
-                accesskey: '',
-                module: ''
+                accesskey: ''
             }
         });
 

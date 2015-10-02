@@ -55,27 +55,9 @@ if ($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['enablePowermail']) 
                 'eval' => 'trim'
             ]
         ],
-        'tx_bfcrmform_username' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf:crmpush_username',
-            'config' => [
-                'size' => 25,
-                'type' => 'input',
-                'eval' => 'trim'
-            ]
-        ],
         'tx_bfcrmform_accesskey' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf:crmpush_accesskey',
-            'config' => [
-                'size' => 25,
-                'type' => 'input',
-                'eval' => 'trim'
-            ]
-        ],
-        'tx_bfcrmform_module' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf:crmpush_module',
             'config' => [
                 'size' => 25,
                 'type' => 'input',
@@ -86,7 +68,7 @@ if ($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['enablePowermail']) 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_powermail_domain_model_forms', $tempColumns);
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         'tx_powermail_domain_model_forms',
-        '--div--;LLL:EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf:crm, tx_bfcrmform_active,tx_bfcrmform_url,tx_bfcrmform_username,tx_bfcrmform_accesskey,tx_bfcrmform_module',
+        '--div--;LLL:EXT:bf_crm_form/Resources/Private/Language/FormWizard.xlf:crm, tx_bfcrmform_active,tx_bfcrmform_url,tx_bfcrmform_accesskey',
         '',
         'after:css'
     );

@@ -14,7 +14,6 @@ namespace Brainformatik\BfCrmForm\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Http\HttpRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -24,11 +23,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class PushService {
 
     /**
-     * @var \TYPO3\CMS\Core\Http\HttpRequest
-     */
-    protected $client;
-
-    /**
      * @var \TYPO3\CMS\Core\Utility\GeneralUtility
      */
     protected $logger;
@@ -36,7 +30,7 @@ class PushService {
     /**
      * @var string
      */
-    protected $suffix = '/webservice.php';
+    protected $suffix = '/modules/Webforms/capture.php';
 
     /**
      * @var array
@@ -49,147 +43,49 @@ class PushService {
     protected $formData = [];
 
     /**
-     * @var array
-     */
-    protected $session = [];
-
-    /**
      * @param array $crmMetaData
      * @param array $crmFormdata
      */
     public function __construct(array $crmMetaData, array $crmFormdata) {
         $this->metaData = $crmMetaData;
         $this->formData = $crmFormdata;
+        $this->formData['publicid'] = $this->metaData['accesskey'];
+
         $this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['bf_crm_form']);
         $this->logger = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
 
         if (!strstr($this->metaData['url'], $this->suffix)) {
             $this->metaData['url'] .= $this->suffix;
         }
-
-        $this->client = new HttpRequest($this->metaData['url']);
     }
 
     /**
      * Main Process
      */
     public function process() {
-        if ($this->getToken() && $this->login()) {
-            $this->createEntity();
-            $this->logout();
-        }
-    }
-
-    /**
-     * Get a valid token for a user
-     *
-     * @return bool
-     */
-    protected function getToken() {
-        $response = $this->send(
-            [
-                'operation' => 'getchallenge',
-                'username' => $this->metaData['username']
-            ],
-            HttpRequest::METHOD_GET
-        );
-
-        if ($response['success']) {
-            $this->session['token'] = $response['result']['token'];
-        }
-
-        return $response['success'];
-    }
-
-    /**
-     * Get a valid user session
-     *
-     * @return bool
-     */
-    protected function login() {
-        $response = $this->send(
-            [
-                'operation' => 'login',
-                'username' => $this->metaData['username'],
-                'accessKey' => md5($this->session['token'] . $this->metaData['accesskey'])
-            ],
-            HttpRequest::METHOD_POST
-        );
-
-        if ($response['success']) {
-            $this->session['userid'] = $response['result']['userId'];
-            $this->session['sessionkey'] = $response['result']['sessionName'];
-        }
-
-        return $response['success'];
-    }
-
-    /**
-     * Close a valid user session
-     *
-     * @return bool
-     */
-    protected function logout() {
-        $response = $this->send(
-            [
-                'operation' => 'logout',
-                'sessionName' => $this->session['sessionkey'],
-            ],
-            HttpRequest::METHOD_POST
-        );
-
-        return $response['success'];
-    }
-
-    /**
-     * Send data to crm
-     *
-     * @return bool
-     */
-    protected function createEntity() {
-        // special filter for assigned_user_id
-        if (!isset($this->formData['assigned_user_id']) || empty($this->formData['assigned_user_id'])) {
-            $this->formData['assigned_user_id'] = $this->session['userid'];
-        } else if (is_numeric($this->formData['assigned_user_id'])) {
-            $this->formData['assigned_user_id'] = '19x' . $this->formData['assigned_user_id'];
-        }
-
-        $response = $this->send(
-            [
-                'operation' => 'create',
-                'sessionName' => $this->session['sessionkey'],
-                'element' => json_encode($this->formData),
-                'elementType' => $this->metaData['module']
-            ],
-            HttpRequest::METHOD_POST
-        );
-
-        return $response['success'];
+        return $this->send();
     }
 
     /**
      * Request helper
      *
-     * @param array  $data
-     * @param string $method
-     *
      * @return array
      */
-    protected function send(array $data, $method) {
-        if ($method === HttpRequest::METHOD_POST) {
-            $this->client->setMethod(HttpRequest::METHOD_POST);
-            $this->client->addPostParameter($data);
-        } else {
-            $this->client->setMethod(HttpRequest::METHOD_GET);
-            $url = $this->client->getUrl();
-            $url->setQueryVariables($data);
-        }
+    protected function send() {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->metaData['url']);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->formData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
-        $response = $this->client->send()->getBody();
         $response = json_decode($response, true);
 
         if ($this->extConf['enableLog']) {
-            $this->logger->debug('Request', $data);
+            $this->logger->debug('Request', $this->formData);
             $this->logger->debug('Response', is_array($response) ? $response : [$response]);
         }
 

@@ -33,17 +33,7 @@ class Form extends \In2code\Powermail\Domain\Model\Form {
     /**
      * @var string
      */
-    protected $txBfcrmformUsername;
-
-    /**
-     * @var string
-     */
     protected $txBfcrmformAccesskey;
-
-    /**
-     * @var string
-     */
-    protected $txBfcrmformModule;
 
     /**
      * @param string $txBfcrmformActive
@@ -74,20 +64,6 @@ class Form extends \In2code\Powermail\Domain\Model\Form {
     }
 
     /**
-     * @param string $txBfcrmformUsername
-     */
-    public function setTxBfcrmformUsername($txBfcrmformUsername) {
-        $this->txBfcrmformUsername = $txBfcrmformUsername;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTxBfcrmformUsername() {
-        return $this->txBfcrmformUsername;
-    }
-
-    /**
      * @param string $txBfcrmformAccesskey
      */
     public function setTxBfcrmformAccesskey($txBfcrmformAccesskey) {
@@ -99,19 +75,5 @@ class Form extends \In2code\Powermail\Domain\Model\Form {
      */
     public function getTxBfcrmformAccesskey() {
         return $this->txBfcrmformAccesskey;
-    }
-
-    /**
-     * @param string $txBfcrmformModule
-     */
-    public function setTxBfcrmformModule($txBfcrmformModule) {
-        $this->txBfcrmformModule = $txBfcrmformModule;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTxBfcrmformModule() {
-        return $this->txBfcrmformModule;
     }
 }

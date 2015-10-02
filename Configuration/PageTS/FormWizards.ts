@@ -16,7 +16,7 @@ mod.wizards {
                             showPostProcessors := addToList(crmpush)
                             postProcessors {
                                 crmpush {
-                                    showProperties = url, username, accesskey, module
+                                    showProperties = url, accesskey
                                 }
                             }
                         }

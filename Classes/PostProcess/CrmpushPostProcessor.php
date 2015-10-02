@@ -87,9 +87,7 @@ class CrmpushPostProcessor implements PostProcessorInterface {
     public function process() {
         $this->_crmMetaData = [
             'url' => $this->typoScript['url'],
-            'username' => $this->typoScript['username'],
-            'accesskey' => $this->typoScript['accesskey'],
-            'module' => $this->typoScript['module']
+            'accesskey' => $this->typoScript['accesskey']
         ];
 
         $this->prepareDataForCrm($this->form->getElements());

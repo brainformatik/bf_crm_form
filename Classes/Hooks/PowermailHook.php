@@ -69,9 +69,7 @@ class PowermailHook {
 
         $this->_crmMetaData = [
             'url' => $form->getTxBfcrmformUrl(),
-            'username' => $form->getTxBfcrmformUsername(),
-            'accesskey' => $form->getTxBfcrmformAccesskey(),
-            'module' => $form->getTxBfcrmformModule()
+            'accesskey' => $form->getTxBfcrmformAccesskey()
         ];
 
         foreach ($mail->getAnswers() as $answer) {
