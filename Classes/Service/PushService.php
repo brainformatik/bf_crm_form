@@ -79,6 +79,7 @@ class PushService {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->formData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->extConf['httpTimeout']);
         $response = curl_exec($ch);
         curl_close($ch);
 

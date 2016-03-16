@@ -17,6 +17,10 @@
             <trans-unit id="system.log.error" xml:space="preserve">
                 <source>Logging of communication errors</source>
             </trans-unit>
+
+            <trans-unit id="http.post.timeout" xml:space="preserve">
+                <source>Timeout in seconds for a http request</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
