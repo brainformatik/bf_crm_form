@@ -81,9 +81,15 @@ class PushService {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->extConf['httpTimeout']);
         $response = curl_exec($ch);
-        curl_close($ch);
+        $errno = curl_errno($ch);
 
-        $response = json_decode($response, true);
+        if (!$response || $errno) {
+            $this->logger->debug('Curl Error', [$errno, curl_error($ch)]);
+        } else {
+            $response = json_decode($response, true);
+        }
+        
+        curl_close($ch);
 
         if ($this->extConf['enableLog']) {
             $this->logger->debug('Request', $this->formData);
